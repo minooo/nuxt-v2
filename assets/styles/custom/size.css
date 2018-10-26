@@ -1,0 +1,777 @@
+/* scss 语法参考 http://www.w3cplus.com/sassguide/syntax.html */
+/* 公用的间距样式 */
+/* 通用的padding margin值 从5px到30px 步进为5 */
+/* @for $i from 1 through 6 {
+  .ptb#{$i * 5}, .pt#{$i * 5} {
+      padding-top: $i * 5 * 1px
+  }
+  .ptb#{$i * 5}, .pb#{$i * 5} {
+      padding-bottom: $i * 5 * 1px;
+  }
+  .plr#{$i * 5}, .pl#{$i * 5} {
+      padding-left: $i * 5 * 1px;
+  }
+  .plr#{$i * 5}, .pr#{$i * 5} {
+      padding-right: $i * 5 * 1px;
+  }
+  .mt#{$i * 5} {
+      margin-top: $i * 5 * 1px;
+  }
+  .mb#{$i * 5} {
+      margin-bottom: $i * 5 * 1px;
+  }
+  .ml#{$i * 5} {
+      margin-left: $i * 5 * 1px;
+  }
+  .mr#{$i * 5} {
+      margin-right: $i * 5 * 1px;
+  }
+} */
+.ptb5, .pt5 {
+  padding-top: 5px;
+}
+
+.ptb5, .pb5 {
+  padding-bottom: 5px;
+}
+
+.plr5, .pl5 {
+  padding-left: 5px;
+}
+
+.plr5, .pr5 {
+  padding-right: 5px;
+}
+
+.mt5 {
+  margin-top: 5px;
+}
+
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.ml5 {
+  margin-left: 5px;
+}
+
+.mr5 {
+  margin-right: 5px;
+}
+
+.ptb10, .pt10 {
+  padding-top: 10px;
+}
+
+.ptb10, .pb10 {
+  padding-bottom: 10px;
+}
+
+.plr10, .pl10 {
+  padding-left: 10px;
+}
+
+.plr10, .pr10 {
+  padding-right: 10px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.ptb15, .pt15 {
+  padding-top: 15px;
+}
+
+.ptb15, .pb15 {
+  padding-bottom: 15px;
+}
+
+.plr15, .pl15 {
+  padding-left: 15px;
+}
+
+.plr15, .pr15 {
+  padding-right: 15px;
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.mb15 {
+  margin-bottom: 15px;
+}
+
+.ml15 {
+  margin-left: 15px;
+}
+
+.mr15 {
+  margin-right: 15px;
+}
+
+.ptb20, .pt20 {
+  padding-top: 20px;
+}
+
+.ptb20, .pb20 {
+  padding-bottom: 20px;
+}
+
+.plr20, .pl20 {
+  padding-left: 20px;
+}
+
+.plr20, .pr20 {
+  padding-right: 20px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.ml20 {
+  margin-left: 20px;
+}
+
+.mr20 {
+  margin-right: 20px;
+}
+
+.ptb25, .pt25 {
+  padding-top: 25px;
+}
+
+.ptb25, .pb25 {
+  padding-bottom: 25px;
+}
+
+.plr25, .pl25 {
+  padding-left: 25px;
+}
+
+.plr25, .pr25 {
+  padding-right: 25px;
+}
+
+.mt25 {
+  margin-top: 25px;
+}
+
+.mb25 {
+  margin-bottom: 25px;
+}
+
+.ml25 {
+  margin-left: 25px;
+}
+
+.mr25 {
+  margin-right: 25px;
+}
+
+.ptb30, .pt30 {
+  padding-top: 30px;
+}
+
+.ptb30, .pb30 {
+  padding-bottom: 30px;
+}
+
+.plr30, .pl30 {
+  padding-left: 30px;
+}
+
+.plr30, .pr30 {
+  padding-right: 30px;
+}
+
+.mt30 {
+  margin-top: 30px;
+}
+
+.mb30 {
+  margin-bottom: 30px;
+}
+
+.ml30 {
+  margin-left: 30px;
+}
+
+.mr30 {
+  margin-right: 30px;
+}
+
+/* 通用的字体大小 从 12 到 48，步进为2 */
+/* @for $i from 6 through 24 {
+  .font#{$i * 2} {
+      font-size: $i * 2 * 1px;
+  }
+} */
+
+.font12 {
+  font-size: 12px;
+}
+
+.font14 {
+  font-size: 14px;
+}
+
+.font16 {
+  font-size: 16px;
+}
+
+.font18 {
+  font-size: 18px;
+}
+
+.font20 {
+  font-size: 20px;
+}
+
+.font22 {
+  font-size: 22px;
+}
+
+.font24 {
+  font-size: 24px;
+}
+
+.font26 {
+  font-size: 26px;
+}
+
+.font28 {
+  font-size: 28px;
+}
+
+.font30 {
+  font-size: 30px;
+}
+
+.font32 {
+  font-size: 32px;
+}
+
+.font34 {
+  font-size: 34px;
+}
+
+.font36 {
+  font-size: 36px;
+}
+
+.font38 {
+  font-size: 38px;
+}
+
+.font40 {
+  font-size: 40px;
+}
+
+.font42 {
+  font-size: 42px;
+}
+
+.font44 {
+  font-size: 44px;
+}
+
+.font46 {
+  font-size: 46px;
+}
+
+.font48 {
+  font-size: 48px;
+}
+
+
+/* 宽度，高度 */
+/* 宽高，从 20px 到 120px, 步进为2px */
+
+/* @for $i from 10 through 60 {
+  .h#{$i * 2} {
+      height: $i * 2 * 1px;
+  }
+  .w#{$i * 2} {
+      width: $i * 2 * 1px;
+  }
+} */
+
+.h20 {
+  height: 20px;
+}
+
+.w20 {
+  width: 20px;
+}
+
+.h22 {
+  height: 22px;
+}
+
+.w22 {
+  width: 22px;
+}
+
+.h24 {
+  height: 24px;
+}
+
+.w24 {
+  width: 24px;
+}
+
+.h26 {
+  height: 26px;
+}
+
+.w26 {
+  width: 26px;
+}
+
+.h28 {
+  height: 28px;
+}
+
+.w28 {
+  width: 28px;
+}
+
+.h30 {
+  height: 30px;
+}
+
+.w30 {
+  width: 30px;
+}
+
+.h32 {
+  height: 32px;
+}
+
+.w32 {
+  width: 32px;
+}
+
+.h34 {
+  height: 34px;
+}
+
+.w34 {
+  width: 34px;
+}
+
+.h36 {
+  height: 36px;
+}
+
+.w36 {
+  width: 36px;
+}
+
+.h38 {
+  height: 38px;
+}
+
+.w38 {
+  width: 38px;
+}
+
+.h40 {
+  height: 40px;
+}
+
+.w40 {
+  width: 40px;
+}
+
+.h42 {
+  height: 42px;
+}
+
+.w42 {
+  width: 42px;
+}
+
+.h44 {
+  height: 44px;
+}
+
+.w44 {
+  width: 44px;
+}
+
+.h46 {
+  height: 46px;
+}
+
+.w46 {
+  width: 46px;
+}
+
+.h48 {
+  height: 48px;
+}
+
+.w48 {
+  width: 48px;
+}
+
+.h50 {
+  height: 50px;
+}
+
+.w50 {
+  width: 50px;
+}
+
+.h52 {
+  height: 52px;
+}
+
+.w52 {
+  width: 52px;
+}
+
+.h54 {
+  height: 54px;
+}
+
+.w54 {
+  width: 54px;
+}
+
+.h56 {
+  height: 56px;
+}
+
+.w56 {
+  width: 56px;
+}
+
+.h58 {
+  height: 58px;
+}
+
+.w58 {
+  width: 58px;
+}
+
+.h60 {
+  height: 60px;
+}
+
+.w60 {
+  width: 60px;
+}
+
+.h62 {
+  height: 62px;
+}
+
+.w62 {
+  width: 62px;
+}
+
+.h64 {
+  height: 64px;
+}
+
+.w64 {
+  width: 64px;
+}
+
+.h66 {
+  height: 66px;
+}
+
+.w66 {
+  width: 66px;
+}
+
+.h68 {
+  height: 68px;
+}
+
+.w68 {
+  width: 68px;
+}
+
+.h70 {
+  height: 70px;
+}
+
+.w70 {
+  width: 70px;
+}
+
+.h72 {
+  height: 72px;
+}
+
+.w72 {
+  width: 72px;
+}
+
+.h74 {
+  height: 74px;
+}
+
+.w74 {
+  width: 74px;
+}
+
+.h76 {
+  height: 76px;
+}
+
+.w76 {
+  width: 76px;
+}
+
+.h78 {
+  height: 78px;
+}
+
+.w78 {
+  width: 78px;
+}
+
+.h80 {
+  height: 80px;
+}
+
+.w80 {
+  width: 80px;
+}
+
+.h82 {
+  height: 82px;
+}
+
+.w82 {
+  width: 82px;
+}
+
+.h84 {
+  height: 84px;
+}
+
+.w84 {
+  width: 84px;
+}
+
+.h86 {
+  height: 86px;
+}
+
+.w86 {
+  width: 86px;
+}
+
+.h88 {
+  height: 88px;
+}
+
+.w88 {
+  width: 88px;
+}
+
+.h90 {
+  height: 90px;
+}
+
+.w90 {
+  width: 90px;
+}
+
+.h92 {
+  height: 92px;
+}
+
+.w92 {
+  width: 92px;
+}
+
+.h94 {
+  height: 94px;
+}
+
+.w94 {
+  width: 94px;
+}
+
+.h96 {
+  height: 96px;
+}
+
+.w96 {
+  width: 96px;
+}
+
+.h98 {
+  height: 98px;
+}
+
+.w98 {
+  width: 98px;
+}
+
+.h100 {
+  height: 100px;
+}
+
+.w100 {
+  width: 100px;
+}
+
+.h102 {
+  height: 102px;
+}
+
+.w102 {
+  width: 102px;
+}
+
+.h104 {
+  height: 104px;
+}
+
+.w104 {
+  width: 104px;
+}
+
+.h106 {
+  height: 106px;
+}
+
+.w106 {
+  width: 106px;
+}
+
+.h108 {
+  height: 108px;
+}
+
+.w108 {
+  width: 108px;
+}
+
+.h110 {
+  height: 110px;
+}
+
+.w110 {
+  width: 110px;
+}
+
+.h112 {
+  height: 112px;
+}
+
+.w112 {
+  width: 112px;
+}
+
+.h114 {
+  height: 114px;
+}
+
+.w114 {
+  width: 114px;
+}
+
+.h116 {
+  height: 116px;
+}
+
+.w116 {
+  width: 116px;
+}
+
+.h118 {
+  height: 118px;
+}
+
+.w118 {
+  width: 118px;
+}
+
+.h120 {
+  height: 120px;
+}
+
+.w120 {
+  width: 120px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.h-full {
+  height: 100vh;
+}
+
+/* radius，从2px 到 12px, 步进为 2px */
+.r2 {
+  border-radius: 2px;
+}
+
+.r4 {
+  border-radius: 4px;
+}
+
+.r6 {
+  border-radius: 6px;
+}
+
+.r8 {
+  border-radius: 8px;
+}
+
+.r10 {
+  border-radius: 10px;
+}
+
+.r12 {
+  border-radius: 12px;
+}
+
+/* 为了实现左右圆角 */
+.r100 {
+  border-radius: 100px;
+}
+.circle {
+  border-radius: 50%;
+}
+/* 字体间距 */
+.spacing1{
+  letter-spacing: 1px;
+}
+.spacing2{
+  letter-spacing: 2px;
+}
+

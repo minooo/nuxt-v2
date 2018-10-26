@@ -1,0 +1,137 @@
+@font-face {
+  font-family: "dudu";
+  src: url("~assets/fonts/dudu.ttf?i6hibr") format("truetype"), url("~assets/fonts/dudu.woff?i6hibr") format("woff"), url("~assets/fonts/dudu.svg?i6hibr#dudu") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="i-"],
+[class*=" i-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "dudu" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i-loading:before {
+  content: "\e97c";
+}
+
+.i-out:before {
+  content: "\e918";
+}
+
+.i-used:before {
+  content: "\e919";
+}
+
+.i-back:before {
+  content: "\e91a";
+}
+
+.i-share:before {
+  content: "\e927";
+}
+
+.i-reduce:before {
+  content: "\e90a";
+}
+
+.i-star-o:before {
+  content: "\e90e";
+}
+
+.i-add:before {
+  content: "\e900";
+}
+
+.i-address:before {
+  content: "\e901";
+}
+
+.i-left:before {
+  content: "\e902";
+}
+
+.i-business:before {
+  content: "\e903";
+}
+
+.i-close:before {
+  content: "\e904";
+}
+
+.i-completed:before {
+  content: "\e905";
+}
+
+.i-comment:before {
+  content: "\e906";
+}
+
+.i-tag:before {
+  content: "\e907";
+}
+
+.i-delete:before {
+  content: "\e908";
+}
+
+.i-edit:before {
+  content: "\e909";
+}
+
+.i-star:before {
+  content: "\e90b";
+}
+
+.i-fail:before {
+  content: "\e90c";
+}
+
+.i-right:before {
+  content: "\e90d";
+}
+
+.i-tag-o:before {
+  content: "\e90f";
+}
+
+.i-more:before {
+  content: "\e910";
+}
+
+.i-order:before {
+  content: "\e911";
+}
+
+.i-recommend:before {
+  content: "\e912";
+}
+
+.i-group:before {
+  content: "\e913";
+}
+
+.i-success:before {
+  content: "\e914";
+}
+
+.i-phone:before {
+  content: "\e915";
+}
+
+.i-clock:before {
+  content: "\e916";
+}
+
+.i-wechat:before {
+  content: "\e917";
+  color: #53cc50;
+}
