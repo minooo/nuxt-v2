@@ -1,5 +1,5 @@
 const pkg = require('./package')
-const plugins = ['@/plugins/element-ui', '@/plugins/axios']
+const plugins = ['@/plugins/element-ui', '@/plugins/axios', '@/plugins/utils']
 if (process.env.NODE_WEB !== 'web') {
   plugins.push('@/plugins/electron')
 }
@@ -63,8 +63,7 @@ module.exports = {
   ** Axios module configuration
   */
   proxy: {
-    '/poster/': 'http://zc-03.dev.bxd365.com',
-    '/app/': 'http://zc-03.dev.bxd365.com'
+    '/app/': 'http://116.62.176.153:8081/'
   },
 
   build: {

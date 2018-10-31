@@ -30,7 +30,7 @@ console.log(`Nuxt working on ${_NUXT_URL_}`)
 */
 let win = null
 let tray = null
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, Tray, Menu, shell } = require('electron')
 
 // 创建实例
 const newWin = () => {
@@ -95,6 +95,11 @@ const newWin = () => {
   // 退出程序
   ipcMain.on('quit-app', () => {
     app.quit()
+  })
+
+  // 打开外部链接
+  ipcMain.on('open-url', (event, url) => {
+    shell.openExternal(url)
   })
 
   if (config.dev) {

@@ -64,20 +64,16 @@
   border-top: 1px solid #e9e9e9;
 }
 
+.border-right {
+  border-right: 1px solid #e9e9e9;
+}
+
 .border-bottom {
   border-bottom: 1px solid #e9e9e9;
 }
 
 .border-bottom:last-child {
   border-bottom: none;
-}
-
-.border-bottom-one {
-  border-bottom: 1px solid #e9e9e9;
-}
-
-.border-right {
-  border-right: 1px solid #e9e9e9;
 }
 
 .border-main {
@@ -97,5 +93,9 @@
 }
 
 .border-default {
-  border: 1px solid #e8e8e8;
+  border: 1px solid #e5e5e5;
+}
+
+.border-none {
+  border: none;
 }
