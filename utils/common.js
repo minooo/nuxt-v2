@@ -19,7 +19,7 @@ export const isPwd = pwd => {
     return false
   }
   const m = pwd.replace(/ /g, '')
-  return /^[a-z0-9]{6,8}$/.test(m) ? m : false
+  return /^[a-z0-9]{8,16}$/.test(m) ? m : false
 }
 
 export const isIOS = () => /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)
@@ -52,6 +52,7 @@ export const clipBigNum = item => {
 
 export const serializeParams = params =>
   Object.entries(params)
+    .sort()
     .filter(x => x[0] !== 'file')
     .map(x => `${x[0]}=${x[1]}`)
     .join('&')

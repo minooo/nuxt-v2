@@ -2,7 +2,7 @@
   <div style="width: 688px; height: 374px;"
        class="flex ai-center jc-around">
     <div style="width: 300px">
-      <div class="flex jc-between ai-center">
+      <div :class="`flex jc-between ai-center ${form.msg ? '' : 'mb30'}`">
         <div class="font18">{{text[0]}}</div>
         <span class="flex-inline ai-center pointer"
               @click="form.type = text[3]">
@@ -10,16 +10,14 @@
           <i class="el-icon-arrow-right c-main font16" />
         </span>
       </div>
-      <div class="h34">
-        <el-alert v-if="form.msg"
-                  :title="form.msg"
-                  type="error"
-                  class="bg-white font12"
-                  style="padding-left: 0;"
-                  :closable="false"
-                  show-icon>
-        </el-alert>
-      </div>
+      <el-alert v-if="form.msg"
+                :title="form.msg"
+                type="error"
+                class="bg-white font12"
+                style="padding-left: 0;"
+                :closable="false"
+                show-icon>
+      </el-alert>
 
       <div v-if="form.type !== 5"
            class="mb10 border-default h42 flex">
@@ -43,8 +41,12 @@
                  class="s-input h40 equal border-none font13" />
         </div>
         <el-button type="primary"
+                   v-model.trim="form.auth"
+                   @click="onGetAuth"
+                   :loading="form.authLoading"
+                   :disabled="form.authNum > 0"
                    class="w90 h40 plr5 font13"
-                   plain>获取验证码</el-button>
+                   plain>{{form.authNum === 0 ? `${form.authLoading ? '获取中' : '获取验证码'}` : `${form.authNum}s后获取`}}</el-button>
       </div>
 
       <div v-if="form.type !== 2 && form.type !== 4"
@@ -80,7 +82,7 @@
                  class="w-100"
                  @click="onSubmit"
                  :disabled="form.type === 3 ? !form.agree ? true : false : false"
-                 :loading="false">{{text[2]}}</el-button>
+                 :loading="form.isLoading">{{text[2]}}</el-button>
       <div v-if="form.type === 1 || form.type === 2"
            class="mt10">
         <el-button type="text"
@@ -110,12 +112,15 @@ export default {
   data() {
     return {
       form: {
-        type: 1, // 1：账号登陆，2：验证码登陆，3：新用户注册，4：找回密码，5：找回密码下一步
+        type: 1, // 1：账号登录，2：验证码登录，3：新用户注册，4：找回密码，5：找回密码下一步
         msg: '',
         agree: true,
         rember: false,
+        isLoading: false,
         user: '',
         auth: '',
+        authNum: 0,
+        authLoading: false,
         pwd: '',
         repwd: ''
       }
@@ -142,11 +147,16 @@ export default {
     'form.type': function(val, oldVal) {
       this.form = {
         ...this.form,
-        msg: '',
-        user: '',
-        auth: '',
-        pwd: '',
-        repwd: ''
+        msg: ''
+      }
+      if (val === 3) {
+        this.form = {
+          ...this.form,
+          user: '',
+          auth: '',
+          pwd: '',
+          repwd: ''
+        }
       }
     }
   },
@@ -162,21 +172,44 @@ export default {
         window.open(url)
       }
     },
+    // tick auch
+    tickAuch() {
+      return setTimeout(() => {
+        if (this.form.authNum > 0) {
+          this.form.authNum -= 1
+          this.tickAuch()
+        } else {
+          this.form.authNum = 0
+        }
+      }, 1000)
+    },
+    // 获取验证码
+    onGetAuth() {
+      const { user } = this.form
+      if (!this.$utils.common.isMobile(user)) {
+        this.form.msg = '手机号格式错误，请检查'
+        return null
+      }
+      this.form.authLoading = true
+      this.$axios
+        .post('/app/user/sms/send', { phone: user, usage: 2 })
+        .then(res => {
+          const { data } = res
+          if (data.code === 0) {
+            this.$message.success('短信发送成功，请注意查收')
+            this.form = {
+              ...this.form,
+              authLoading: false,
+              authNum: 60
+            }
+            this.tickAuch()
+          }
+        })
+    },
     // 提交表单
     onSubmit() {
-      const { type, agree, rember, user, auth, pwd, repwd } = this.form
+      const { type, rember, user, auth, pwd, repwd } = this.form
       const app = this
-      // type => 1：账号登陆，2：验证码登陆，3：新用户注册，4：找回密码，5：找回密码下一步
-      console.log(
-        this.$utils.common.isMobile(user),
-        type,
-        agree,
-        rember,
-        user,
-        auth,
-        pwd,
-        repwd
-      )
 
       const validFn = function(condition, msg) {
         return function() {
@@ -197,27 +230,81 @@ export default {
         !this.$utils.common.isPwd(pwd),
         '密码长度为8到16个字符，必须且只包含字母、数字'
       )
-      // const validRepwd = validFn(!repwd || repwd !== this.$utils.common.isPwd(pwd), '两次密码不一致，请检查')
-
+      const validRepwd = validFn(
+        !repwd || repwd !== this.$utils.common.isPwd(pwd),
+        '两次密码不一致，请检查'
+      )
+      // type => 1：账号登录，2：验证码登录，3：新用户注册，4：找回密码，5：找回密码下一步
       if (type === 1 || type === 2) {
+        // 账号登录，验证码登录
         if (!validUser()) return
         if (type === 1 && !validPwd()) return
         if (type === 2 && !validAuth()) return
-        console.log('????')
-        this.$axios.post('/app/user/account/login', {
-          phone: user,
-          type: type === 1 ? 0 : 1,
-          password: pwd,
-          deviceType: 3,
-          deviceName: '127.0.0.1',
-          imei: 'pc-mac',
-          step: 1
-        })
+        this.form.msg = ''
+        this.$axios
+          .post('/app/user/account/login', {
+            phone: user,
+            type: type === 1 ? 0 : 1,
+            ...(type === 1 ? { password: pwd } : { captcha: auth }),
+            deviceType: 3,
+            deviceName: '127.0.0.1',
+            imei: 'pc-mac',
+            step: 1
+          })
+          .then(res => {
+            const { data } = res
+            if (data.code === 0) {
+              if (type === 1) {
+                this.$utils.cache.setItem('my', {
+                  ...this.$utils.cache.getItem('my'),
+                  user,
+                  pwd: rember ? pwd : '',
+                  rember
+                })
+              }
+
+              if (this.$ipcR) {
+                this.$ipcR.send('restore-window')
+              }
+              this.$router.push(this.$route.query.from || '/')
+            }
+          })
       } else if (type === 3) {
+        // 用户注册
+        if (!validUser()) return
+        if (!validAuth()) return
+        if (!validPwd()) return
+        if (!validRepwd()) return
+        this.form.msg = ''
+        this.$axios
+          .post('/app/user/account/register', {
+            phone: user,
+            captcha: auth,
+            password: pwd
+          })
+          .then(res => {
+            const { data } = res
+            if (data.code === 0) {
+              this.$message.success('恭喜你，注册成功！赶紧去登录吧登录')
+              this.form.type = 1
+            }
+          })
       } else if (type === 4) {
       } else {
       }
     }
+  },
+  created() {
+    const my = this.$utils.cache.getItem('my') || {}
+    this.form = {
+      ...this.form,
+      user: my.user || '',
+      pwd: my.pwd || '',
+      rember: my.rember || false
+    }
+  },
+  beforeDestroy() {
+    if (this.tickAuch) clearTimeout(this.tickAuch)
   }
 }
 </script>

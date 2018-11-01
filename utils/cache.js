@@ -1,4 +1,4 @@
-const setItem = (key, v, overtime = 30 * 24 * 60 * 60 * 1000) => {
+const setItem = (key, v, overtime = 12 * 30 * 24 * 60 * 60 * 1000) => {
   const val = {
     value: v,
     overtime: Date.now() + overtime
