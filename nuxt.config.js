@@ -70,10 +70,15 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    // babel: {
+    //   presets: ['@nuxtjs/babel-preset-app'],
+    //   exclude: /NIM_Web_SDK.*\.js/
+    // },
     postcss: false, // https://github.com/nuxt/nuxt.js/issues/4143
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
+        config.devtool = '@source-map'
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -84,6 +89,13 @@ module.exports = {
       if (ctx.isClient && process.env.NODE_WEB !== 'web') {
         config.target = 'electron-renderer'
       }
+      // if (ctx.isClient) {
+      //   config.module.rules.push({
+      //     test: /\.js$/,
+      //     loader: 'babel-loader',
+      //     exclude: /NIM_Web_SDK.*\.js/
+      //   })
+      // }
     }
   },
 
