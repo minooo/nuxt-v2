@@ -17,6 +17,16 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    // // html head 中创建 script 标签
+    // script: [
+    //   {
+    //     innerHTML: require('./assets/js/NIM_Web_NIM_v5.7.0.js'),
+    //     type: 'text/javascript',
+    //     charset: 'utf-8'
+    //   }
+    // ],
+    // // 不对<script>标签中内容做转义处理
+    // __dangerouslyDisableSanitizers: ['script']
   },
 
   /*

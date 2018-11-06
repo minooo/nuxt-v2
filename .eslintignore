@@ -1,4 +1,4 @@
 build
 dist
 node_modules
-utils/NIM_Web_NIM_v5.7.0.js
+static/js

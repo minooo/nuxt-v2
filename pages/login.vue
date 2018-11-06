@@ -126,6 +126,11 @@ export default {
       }
     }
   },
+  head() {
+    return {
+      script: [{ src: '/js/NIM_Web_NIM_v5.7.0.js' }]
+    }
+  },
   computed: {
     text() {
       // 主标题，副标题，按钮文本，切换类型

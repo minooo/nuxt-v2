@@ -39,6 +39,11 @@ export default {
   async asyncData({ app }) {
     const ip = await app.$axios.$get('http://icanhazip.com')
     return { ip }
+  },
+  head() {
+    return {
+      script: [{ src: '/js/NIM_Web_NIM_v5.7.0.js' }]
+    }
   }
 }
 </script>
