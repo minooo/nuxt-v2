@@ -111,6 +111,7 @@ export default {
   layout: 'login',
   data() {
     return {
+      timeoutNum: null,
       form: {
         type: 1, // 1：账号登录，2：验证码登录，3：新用户注册，4：找回密码，5：找回密码下一步
         msg: '',
@@ -179,7 +180,7 @@ export default {
     },
     // tick auch
     tickAuch() {
-      return setTimeout(() => {
+      this.timeoutNum = setTimeout(() => {
         if (this.form.authNum > 0) {
           this.form.authNum -= 1
           this.tickAuch()
@@ -295,6 +296,21 @@ export default {
             }
           })
       } else if (type === 4) {
+        // 找回密码
+        if (!validUser()) return
+        if (!validAuth()) return
+        this.form.msg = ''
+        this.$axios
+          .post('app/user/account/checkcode', {
+            phone: user,
+            captcha: auth
+          })
+          .then(res => {
+            const { data } = res
+            if (data.code === 0) {
+              // this.form.type
+            }
+          })
       } else {
       }
     }
@@ -309,7 +325,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if (this.tickAuch) clearTimeout(this.tickAuch)
+    if (this.timeoutNum) clearTimeout(this.timeoutNum)
   }
 }
 </script>
