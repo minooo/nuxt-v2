@@ -13,17 +13,33 @@ export default function(ctx) {
   // onRequestError(err)
   // onResponseError(err)
   ctx.$axios.onRequest(config => {
+    // console.log('minoo', ctx.store.state.user, ctx.app.store.state.user)
+    const noAuth = config.data.noAuth
+    delete config.data.noAuth
+    const initParams = qs.parse(config.data)
+
+    // eslint-disable-next-line
+    const { u_id, c_id, u_password } = ctx.store.state.user.base
     const _params = {
-      ...qs.parse(config.data),
+      ...initParams,
       api_version: '1.2',
       app_id: 'zc_pc_admin',
       request_date: ctx.app.$utils.moment().format('YYYY-MM-DD HH:mm:ss'),
-      request_sign: '9b3ef6d0523e-5c1a41380f7e'
+      request_sign: '9b3ef6d0523e-5c1a41380f7e',
+      ...(!noAuth && {
+        u_id,
+        c_id,
+        password: u_password
+        // ver: '1.6.0.19-网易云信V1'
+      })
+      // ver: '1.6.0.17'
     }
     let str = ctx.app.$utils.common.serializeParams(_params)
+
     str = `service.inswindows.com${
       config.url
     }?${str}Jck3Dy3CjkZUji6MhPnRU1i8LKfPnHAl`
+
     str = ctx.app.$utils.md5(str)
     _params.sign = str
 
@@ -64,7 +80,7 @@ export default function(ctx) {
       // })
       Vue.prototype.$message.error(data.message || '账号或密码错误，请检查')
       if (ctx.route.path !== '/login') {
-        Vue.prototype.$message.error('您需要登陆哦！')
+        Vue.prototype.$message.error(data.message || '您需要登陆哦！')
         ctx.redirect('/login', { from: ctx.route.path })
       }
     }

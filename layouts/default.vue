@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex column h-full">
     <div class="h60 bg-main flex jc-between ai-center">
       <div>搜索</div>
       <div>

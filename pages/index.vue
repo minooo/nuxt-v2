@@ -1,27 +1,13 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <el-button type="primary"
-                 plain>
-        hello world {{ ip }}
-      </el-button>
-      <h1 class="title">
-        2-nuxt-v2123
-      </h1>
-      <h2 class="subtitle">
-        My scrumtrulescent Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/"
-           target="_blank"
-           class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js"
-           target="_blank"
-           class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+  <div class="flex h-100">
+    <!-- <logo /> -->
+    <!-- 左侧 -->
+    <div style="width: 260px"
+         class="bg-main">123</div>
+
+    <!-- 右侧 -->
+    <div class="equal-auto bg-second">33</div>
+  </div>
 </template>
 
 <script>
@@ -37,8 +23,8 @@ export default {
     }
   },
   async asyncData({ app }) {
-    const ip = await app.$axios.$get('http://icanhazip.com')
-    return { ip }
+    // const ip = await app.$axios.$get('http://icanhazip.com')
+    // return { ip }
   },
   head() {
     return {

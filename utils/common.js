@@ -50,12 +50,18 @@ export const clipBigNum = item => {
   return item
 }
 
-export const serializeParams = params =>
-  Object.entries(params)
-    .sort()
+export const serializeParams = params => {
+  const sortKeyArr = Object.keys(params).sort()
+  const obj = {}
+  sortKeyArr.forEach(x => {
+    obj[x] = params[x]
+  })
+
+  return Object.entries(obj)
     .filter(x => x[0] !== 'file')
     .map(x => `${x[0]}=${x[1]}`)
     .join('&')
+}
 
 // search 转为 obj
 export const searchToObj = (

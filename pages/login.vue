@@ -97,6 +97,7 @@
         <el-button type="text"
                    @click="onUrl(2)"
                    class="font12 s-ml0">《隐私策略》</el-button>
+
       </div>
     </div>
 
@@ -127,11 +128,6 @@ export default {
       }
     }
   },
-  head() {
-    return {
-      script: [{ src: '/js/NIM_Web_NIM_v5.7.0.js' }]
-    }
-  },
   computed: {
     text() {
       // 主标题，副标题，按钮文本，切换类型
@@ -145,7 +141,7 @@ export default {
         case 4:
           return ['找回密码 ', '返回登录', '下一步', 1]
         default:
-          return ['找回密码', '返回登录', '提交', 1]
+          return ['重置密码', '返回登录', '提交', 1]
       }
     }
   },
@@ -198,7 +194,7 @@ export default {
       }
       this.form.authLoading = true
       this.$axios
-        .post('/app/user/sms/send', { phone: user, usage: 2 })
+        .post('/app/user/sms/send', { noAuth: true, phone: user, usage: 2 })
         .then(res => {
           const { data } = res
           if (data.code === 0) {
@@ -249,6 +245,7 @@ export default {
         this.form.msg = ''
         this.$axios
           .post('/app/user/account/login', {
+            noAuth: true,
             phone: user,
             type: type === 1 ? 0 : 1,
             ...(type === 1 ? { password: pwd } : { captcha: auth }),
@@ -261,6 +258,8 @@ export default {
             const { data } = res
             if (data.code === 0) {
               if (type === 1) {
+                this.$store.commit('user/change', data.data)
+                sessionStorage.setItem('isLogined', 'yes')
                 this.$utils.cache.setItem('my', {
                   ...this.$utils.cache.getItem('my'),
                   user,
@@ -284,6 +283,7 @@ export default {
         this.form.msg = ''
         this.$axios
           .post('/app/user/account/register', {
+            noAuth: true,
             phone: user,
             captcha: auth,
             password: pwd
@@ -291,7 +291,7 @@ export default {
           .then(res => {
             const { data } = res
             if (data.code === 0) {
-              this.$message.success('恭喜你，注册成功！赶紧去登录吧登录')
+              this.$message.success('恭喜你，注册成功！赶紧去登录吧')
               this.form.type = 1
             }
           })
@@ -301,17 +301,45 @@ export default {
         if (!validAuth()) return
         this.form.msg = ''
         this.$axios
-          .post('app/user/account/checkcode', {
+          .post('/app/user/account/checkcode', {
+            noAuth: true,
             phone: user,
             captcha: auth
           })
           .then(res => {
             const { data } = res
             if (data.code === 0) {
-              // this.form.type
+              this.form = {
+                ...this.form,
+                type: 5,
+                pwd: '',
+                repwd: ''
+              }
             }
           })
       } else {
+        // 修改密码
+        if (!validPwd()) return
+        if (!validRepwd()) return
+        this.form.msg = ''
+        this.$axios
+          .post('/app/user/account/updatepwd', {
+            noAuth: true,
+            phone: user,
+            newPassword: pwd
+          })
+          .then(res => {
+            const { data } = res
+            if (data.code === 0) {
+              this.$message.success('修改密码成功，赶紧登录吧！')
+              this.form = {
+                ...this.form,
+                type: 1,
+                pwd: '',
+                repwd: ''
+              }
+            }
+          })
       }
     }
   },

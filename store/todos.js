@@ -1,7 +1,7 @@
 // 无论模式如何，state 应始终是一个函数，以避免服务器端不需要的共享状态
 export const state = () => ({
   count: 0,
-  list: [
+  todos: [
     { id: 1, title: 'aaa', done: false },
     { id: 2, title: 'bbb', done: true }
   ]
