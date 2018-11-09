@@ -1,5 +1,5 @@
 <template>
-  <div class="c-main font16">
+  <div class="flex h-100">
     工作台
   </div>
 </template>

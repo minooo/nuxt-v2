@@ -258,8 +258,7 @@ export default {
             const { data } = res
             if (data.code === 0) {
               if (type === 1) {
-                this.$store.commit('user/change', data.data)
-                sessionStorage.setItem('isLogined', 'yes')
+                this.$store.commit('user/change', { ...data.data })
                 this.$utils.cache.setItem('my', {
                   ...this.$utils.cache.getItem('my'),
                   user,

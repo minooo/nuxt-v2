@@ -1,8 +1,7 @@
 export default function({ redirect, route, ...rest }) {
   // If the user is not authenticated
   const whiteList = ['/login']
-
-  if (!sessionStorage.getItem('isLogined')) {
+  if (!rest.store.state.user.base.u_id) {
     if (rest.app.$ipcR) {
       rest.app.$ipcR.send('open-login-window')
     }

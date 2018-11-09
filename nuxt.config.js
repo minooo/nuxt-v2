@@ -1,5 +1,10 @@
 const pkg = require('./package')
-const plugins = ['@/plugins/element-ui', '@/plugins/axios', '@/plugins/utils']
+const plugins = [
+  '@/plugins/element-ui',
+  '@/plugins/axios',
+  '@/plugins/utils',
+  { src: '@/plugins/nim', ssr: false }
+]
 if (process.env.NODE_WEB !== 'web') {
   plugins.push('@/plugins/electron')
 }
@@ -17,10 +22,10 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-    // // html head 中创建 script 标签
+    // html head 中创建 script 标签
     // script: [
     //   {
-    //     innerHTML: require('./assets/js/NIM_Web_NIM_v5.7.0.js'),
+    //     src: '@/static/js/NIM_Web_NIM_v5.7.0.js',
     //     type: 'text/javascript',
     //     charset: 'utf-8'
     //   }
