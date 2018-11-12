@@ -1,14 +1,160 @@
 <template>
-  <div class="flex column h-full">
-    <div class="h60 bg-main flex jc-between ai-center">
+  <div class="flex column h-full s-size-limit">
+    <div class="h60 flex jc-between ai-center drag s-bg-img">
       <div>搜索</div>
-      <div>
-        <nuxt-link to="/">消息</nuxt-link>
-        <nuxt-link to="/social">通讯录</nuxt-link>
-        <nuxt-link to="/work">工作台</nuxt-link>
+      <div class="flex g-tooltip">
+        <nuxt-link to="/">
+          <el-tooltip effect="dark"
+                      content="消息"
+                      placement="bottom">
+            <div class="h60 no-drag s-route-ico s-route-ico-1"></div>
+          </el-tooltip>
+        </nuxt-link>
+        <nuxt-link to="/social">
+          <el-tooltip effect="dark"
+                      content="通讯录"
+                      placement="bottom">
+            <div class="h60 no-drag ml10 mr10 s-route-ico s-route-ico-2"></div>
+          </el-tooltip>
+        </nuxt-link>
+        <nuxt-link to="/work">
+          <el-tooltip effect="dark"
+                      content="工作台"
+                      placement="bottom">
+            <div class="h60 no-drag s-route-ico s-route-ico-3"></div>
+          </el-tooltip>
+        </nuxt-link>
       </div>
-      <div>个人中心，关闭等</div>
+      <div :class="`s-right ${isBrowser ? 's-right-bg-browser' : ''} relative h60`">
+        <div class="s-right-avatar pointer no-drag"
+             @click="onAvatar">
+          <img :src="avatar"
+               class="h40 w40 circle"
+               :onerror="`this.src='avatar.png'`"
+               alt="头像">
+        </div>
+        <div class="w22 h30 pointer no-drag s-right-btn s-right-btn-1"
+             :title="`${isBrowser ? '' : '关闭'}`"
+             @click="onHide"></div>
+        <div class="w22 h30 pointer no-drag s-right-btn s-right-btn-2"
+             :title="`${isBrowser ? '' : '最大化'}`"
+             @click="onSwitchSize"></div>
+        <div class="w22 h30 pointer no-drag s-right-btn s-right-btn-3"
+             :title="`${isBrowser ? '' : '最小化'}`"
+             @click="onMini"></div>
+        <div class="w22 h30 pointer no-drag s-right-btn s-right-btn-4"
+             title="菜单"
+             @click="onMenu"></div>
+      </div>
     </div>
     <nuxt />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    const { avatar } = this.$store.state.user.base
+    return {
+      avatar
+    }
+  },
+  computed: {
+    isBrowser() {
+      return !this.$ipcR
+    }
+  },
+  methods: {
+    onAvatar() {
+      alert(123)
+    },
+    onMenu() {},
+    onMini() {
+      if (this.$ipcR) {
+        this.$ipcR.send('minimize-window')
+      }
+    },
+    onSwitchSize() {},
+    onHide() {
+      if (this.$ipcR) {
+        this.$ipcR.send('hide-window')
+      }
+    }
+  },
+  mounted() {
+    console.log('hhhh', this)
+  }
+}
+</script>
+<style>
+.nuxt-link-exact-active .s-route-ico-1 {
+  background-position: -347px -73px !important;
+}
+.nuxt-link-exact-active .s-route-ico-2 {
+  background-position: -421px -70px !important;
+}
+.nuxt-link-exact-active .s-route-ico-3 {
+  background-position: -490px -71px !important;
+}
+</style>
+
+
+<style scoped>
+.s-size-limit {
+  min-width: 912px;
+  min-height: 695px;
+}
+.s-bg-c {
+  background: rgb(29, 140, 224);
+}
+.s-bg-img {
+  background-image: url('~assets/images/icon.png');
+  background-repeat: no-repeat;
+  background-color: rgb(29, 140, 224);
+}
+.s-route-ico {
+  width: 53px;
+  background-image: url('~assets/images/icon.png');
+  background-repeat: no-repeat;
+}
+.s-route-ico-1 {
+  background-position: -349px -129px;
+}
+.s-route-ico-2 {
+  background-position: -424px -129px;
+}
+.s-route-ico-3 {
+  background-position: -495px -129px;
+}
+.s-right {
+  width: 200px;
+  background-image: url('~assets/images/icon.png');
+  background-position: right -122px;
+  padding-right: 86px;
+}
+.s-right-bg-browser {
+  background-clip: content-box;
+}
+.s-right-avatar {
+  position: absolute;
+  left: 11px;
+  top: 10px;
+}
+.s-right-btn {
+  position: absolute;
+  top: 15px;
+}
+.s-right-btn-1 {
+  right: 12px;
+}
+.s-right-btn-2 {
+  right: 35px;
+}
+.s-right-btn-3 {
+  right: 59px;
+}
+.s-right-btn-4 {
+  right: 83px;
+}
+</style>
+

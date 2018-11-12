@@ -6,6 +6,13 @@
     <div class="Triangle Triangle--four" />
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    console.log('ccc', this)
+  }
+}
+</script>
 
 <style>
 .VueToNuxtLogo {

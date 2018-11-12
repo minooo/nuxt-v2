@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-100">
+  <div class="flex equal-auto">
     通讯录
   </div>
 </template>

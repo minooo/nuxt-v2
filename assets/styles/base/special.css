@@ -11,35 +11,35 @@
 /* 去除默认箭头 */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
-input[type="number"]{
-    -moz-appearance: textfield;
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 /* 全局滚动条定制样式 */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-::-webkit-scrollbar-button:vertical {
+::-webkit-scrollbar-button {
   display: none;
 }
-::-webkit-scrollbar-track:vertical {
+::-webkit-scrollbar-track {
   background-color: black;
 }
 ::-webkit-scrollbar-track-piece {
   background: #fff;
 }
-::-webkit-scrollbar-thumb:vertical {
-  background-color: #d4d5d6;
+::-webkit-scrollbar-thumb {
+  background-color: rgb(210, 210, 210);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:vertical:hover {
-  background-color: #adadad;
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(186, 186, 186);
 }
-::-webkit-scrollbar-corner:vertical {
+::-webkit-scrollbar-corner {
   background-color: #535353;
 }
-::-webkit-scrollbar-resizer:vertical {
+::-webkit-scrollbar-resizer {
   background-color: #ff6e00;
 }

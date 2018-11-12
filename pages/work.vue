@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-100">
+  <div class="flex equal-auto">
     工作台
   </div>
 </template>

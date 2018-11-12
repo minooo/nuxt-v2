@@ -1,9 +1,11 @@
 <template>
-  <div class="flex h-100">
+  <div class="flex equal-auto">
     <!-- <logo /> -->
     <!-- 左侧 -->
     <div style="width: 260px"
-         class="bg-main">123<nuxt-link to="/login">登录</nuxt-link>
+         class="bg-main">
+      123
+      <nuxt-link to="/login">登录</nuxt-link>
     </div>
 
     <!-- 右侧 -->
