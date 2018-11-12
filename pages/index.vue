@@ -51,7 +51,9 @@ export default {
       // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
       switch (data.code) {
         case 302:
-          console.log('账号或者密码错误, 请跳转到登录页面并提示错误')
+          console.log(
+            'SDK 处于断开状态，账号或者密码错误, 请跳转到登录页面并提示错误'
+          )
           break
         case 417:
           console.log(
@@ -141,6 +143,7 @@ export default {
     // https://dev.yunxin.163.com/docs/product/IM%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/SDK%E5%BC%80%E5%8F%91%E9%9B%86%E6%88%90/Web%E5%BC%80%E5%8F%91%E9%9B%86%E6%88%90/%E5%88%9D%E5%A7%8B%E5%8C%96
     this.nim = window.NIM.getInstance({
       // 初始化
+
       debug: false,
       appKey: '73ee59c4c9b6bc9d90bc5041239a6162',
       account: u_id,
