@@ -3,7 +3,7 @@ export const state = () => ({
   teams: [],
   teamMembers: {},
   sessions: [],
-  msgs: []
+  msgs: {}
 })
 
 // 更改 store 中状态的唯一方法就是提交 mutation
