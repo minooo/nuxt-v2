@@ -78,7 +78,8 @@ module.exports = {
   ** Axios module configuration
   */
   proxy: {
-    '/app/': 'http://116.62.176.153:8081'
+    '/app/': 'http://zc.dev.bxd365.com/', // https://service.inswindows.com/
+    '/imapi/': 'https://im.inswindows.com/'
   },
 
   build: {

@@ -266,11 +266,19 @@ export default {
                   rember
                 })
               }
-
-              if (this.$ipcR) {
-                this.$ipcR.send('restore-window')
-              }
-              this.$router.push(this.$route.query.from || '/')
+              // eslint-disable-next-line
+              const { u_id } = data.data
+              this.$axios
+                .post('/app/im/register', { noAuth: true, u_id })
+                .then(res => {
+                  const { data } = res
+                  if (data.code === 0) {
+                    if (this.$ipcR) {
+                      this.$ipcR.send('restore-window')
+                    }
+                    this.$router.push(this.$route.query.from || '/')
+                  }
+                })
             }
           })
       } else if (type === 3) {
