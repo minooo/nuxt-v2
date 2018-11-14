@@ -5,6 +5,7 @@
 
 const http = require('http')
 const { Nuxt, Builder } = require('nuxt')
+const debounce = require('lodash/debounce')
 let config = require('./nuxt.config.js')
 config.rootDir = __dirname // for electron-builder
 // 初始化 Nuxt.js
@@ -44,13 +45,28 @@ const newWin = () => {
     minWidth: initW,
     minHeight: initH,
     frame: false, // 无边框
+    fullscreenable: false, // 禁止窗口进入全屏状态
     icon: `${__dirname}/static/icons/icon.ico`,
     // show: false, // 创建窗口时是否显示
     backgroundColor: '#20a0ff'
   })
 
-  // win.maximize() // 窗口最大化
-  // win.on('closed', () => (win = null))
+  /*
+  **  窗口事件
+  **  文档，https://electronjs.org/docs/api/browser-window#%E4%BA%8B%E4%BB%B6%EF%BC%9A-close
+  */
+
+  // 经过不断验证，窗口移动事件是最佳方案
+  // 因为窗口位置的变化，以及显示隐藏都会触发这个函数
+  win.on(
+    'move',
+    debounce(event => {
+      event.sender.send('move', {
+        isFull: win.isFullScreen(),
+        isMax: win.isMaximized()
+      })
+    }, 100)
+  )
 
   /*
   **  主进程发送&处理消息
@@ -82,14 +98,14 @@ const newWin = () => {
     win.unmaximize()
   })
 
-  // 最小化窗口
-  ipcMain.on('minimize-window', () => {
-    win.minimize()
-  })
-
   // 关闭窗口，注意不是退出
   ipcMain.on('hide-window', () => {
     win.hide()
+  })
+
+  // 最小化窗口
+  ipcMain.on('minimize-window', () => {
+    win.minimize()
   })
 
   // 退出程序

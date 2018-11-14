@@ -14,9 +14,10 @@ export default function(ctx) {
   // onResponseError(err)
   ctx.$axios.onRequest(config => {
     // console.log('minoo', ctx.store.state.user, ctx.app.store.state.user)
-    const noAuth = config.data.noAuth
+
+    const noAuth = config.data ? config.data.noAuth : false
     delete config.data.noAuth
-    const initParams = qs.parse(config.data)
+    const initParams = qs.parse(config.data || '{}')
 
     // eslint-disable-next-line
     const { u_id, c_id, u_password } = ctx.store.state.user.base

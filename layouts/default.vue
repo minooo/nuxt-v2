@@ -1,28 +1,19 @@
 <template>
   <div class="flex column h-full s-size-limit">
     <div class="h60 flex jc-between ai-center drag s-bg-img">
-      <div>搜索</div>
+      <search></search>
       <div class="flex g-tooltip">
         <nuxt-link to="/">
-          <el-tooltip effect="dark"
-                      content="消息"
-                      placement="bottom">
-            <div class="h60 no-drag s-route-ico s-route-ico-1"></div>
-          </el-tooltip>
+          <div class="h60 no-drag s-route-ico s-route-ico-1"
+               title="消息"></div>
         </nuxt-link>
         <nuxt-link to="/social">
-          <el-tooltip effect="dark"
-                      content="通讯录"
-                      placement="bottom">
-            <div class="h60 no-drag ml10 mr10 s-route-ico s-route-ico-2"></div>
-          </el-tooltip>
+          <div class="h60 no-drag ml10 mr10 s-route-ico s-route-ico-2"
+               title="通讯录"></div>
         </nuxt-link>
         <nuxt-link to="/work">
-          <el-tooltip effect="dark"
-                      content="工作台"
-                      placement="bottom">
-            <div class="h60 no-drag s-route-ico s-route-ico-3"></div>
-          </el-tooltip>
+          <div class="h60 no-drag s-route-ico s-route-ico-3"
+               title="工作台"></div>
         </nuxt-link>
       </div>
       <div :class="`s-right ${isBrowser ? 's-right-bg-browser' : ''} relative h60`">
@@ -37,7 +28,7 @@
              :title="`${isBrowser ? '' : '关闭'}`"
              @click="onHide"></div>
         <div class="w22 h30 pointer no-drag s-right-btn s-right-btn-2"
-             :title="`${isBrowser ? '' : '最大化'}`"
+             :title="`${isBrowser ? '' : this.$store.state.win.maximize ? '还原' : '最大化'}`"
              @click="onSwitchSize"></div>
         <div class="w22 h30 pointer no-drag s-right-btn s-right-btn-3"
              :title="`${isBrowser ? '' : '最小化'}`"
@@ -52,7 +43,12 @@
 </template>
 
 <script>
+import Search from '~/components/Search.vue'
+
 export default {
+  components: {
+    Search
+  },
   data() {
     const { avatar } = this.$store.state.user.base
     return {
@@ -74,15 +70,31 @@ export default {
         this.$ipcR.send('minimize-window')
       }
     },
-    onSwitchSize() {},
+    onSwitchSize() {
+      if (this.$ipcR) {
+        if (this.$store.state.win.maximize) {
+          this.$ipcR.send('unmaximize-window')
+        } else {
+          this.$ipcR.send('maximize-window')
+        }
+      }
+    },
     onHide() {
       if (this.$ipcR) {
         this.$ipcR.send('hide-window')
       }
     }
   },
+  created() {
+    if (this.$ipcR) {
+      this.$ipcR.on('move', (event, arg) => {
+        this.$store.commit('win/switchSize', arg.isFull || arg.isMax)
+      })
+    }
+    // console.log('layout-default-created', this)
+  },
   mounted() {
-    console.log('hhhh', this)
+    // console.log('layout-default-mounter', this)
   }
 }
 </script>
