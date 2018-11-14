@@ -3,11 +3,16 @@
     <!-- <logo /> -->
     <!-- 左侧 -->
     <div style="width: 260px"
-         class="bg-main">
-      123
-      <div>会话1数据
+         class="flex column">
+      <div class="equal-flex overflow-y">
+        <a href="/login">返回登录</a>
       </div>
-      <a href="/login">返回登录</a>
+      <div class="h60 flex ai-center jc-center border-top">
+        <div class="s-add-groupchat flex ai-center jc-center c-main border-default r4 pointer">
+          <span class="s-add-groupchat-ico"></span>
+          发起群聊
+        </div>
+      </div>
     </div>
 
     <!-- 右侧 -->
@@ -25,10 +30,6 @@ export default {
   data() {
     return {}
   },
-  async asyncData({ app }) {
-    // const ip = await app.$axios.$get('http://icanhazip.com')
-    // return { ip }
-  },
   computed: {},
   watch: {},
   methods: {},
@@ -42,5 +43,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.s-add-groupchat {
+  width: 170px;
+  height: 40px;
+}
+.s-add-groupchat-ico {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  margin-right: 8px;
+  background-image: url('~assets/images/create_group.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 </style>
+
