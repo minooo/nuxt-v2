@@ -12,6 +12,7 @@
           <span class="s-add-groupchat-ico"></span>
           发起群聊
         </div>
+        <select-member :show='showSelectMember'></select-member>
       </div>
     </div>
 
@@ -22,13 +23,17 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import SelectMember from '~/components/SelectMember.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
+    SelectMember
   },
   data() {
-    return {}
+    return {
+      showSelectMember: false
+    }
   },
   computed: {},
   watch: {},
