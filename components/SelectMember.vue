@@ -11,7 +11,7 @@ export default {
   props: ['show'],
   methods: {
     closeDiv() {
-      this.$emit('update:show', false) //触发 input 事件，并传入新值
+      this.$emit('update:show', false) // 触发 input 事件，并传入新值
     }
   }
 }
