@@ -19,7 +19,7 @@
       <div :class="`s-right ${isBrowser ? 's-right-bg-browser' : ''} relative h60`">
         <div class="s-right-avatar pointer no-drag"
              @click="onAvatar">
-          <img :src="avatar"
+          <img :src="this.$store.state.user.base.avatar"
                class="h40 w40 circle"
                :onerror="`this.src='avatar.png'`"
                alt="头像">
@@ -48,19 +48,6 @@ import Search from '~/components/Search.vue'
 export default {
   components: {
     Search
-  },
-  data() {
-    const { avatar } = this.$store.state.user.base
-    const { teams, teamMembers, sessions, msgs } = this.$store.state.nim
-    return {
-      avatar,
-      nimData: {
-        teams,
-        teamMembers,
-        sessions,
-        msgs
-      }
-    }
   },
   computed: {
     isBrowser() {
@@ -133,12 +120,12 @@ export default {
     // 群组
     onTeams(teams) {
       console.log('收到群列表', teams)
-      const newTeams = window.nim.mergeTeams(this.nimData.teams, teams)
+      const newTeams = window.nim.mergeTeams(this.$store.state.nim.teams, teams)
       this.$store.commit('nim/changeTeams', newTeams)
     },
     onSyncCreateTeam(team) {
       console.log('创建群的回调', team)
-      const newTeams = window.nim.mergeTeams(this.nimData.teams, team)
+      const newTeams = window.nim.mergeTeams(this.$store.state.nim.teams, team)
       this.$store.commit('nim/changeTeams', newTeams)
     },
     onTeamMembers(data) {
@@ -146,13 +133,13 @@ export default {
       console.log('群id', teamId, '群成员', members)
 
       const data1 = window.nim.mergeTeamMembers(
-        this.nimData.teamMembers[teamId],
+        this.$store.state.nim.teamMembers[teamId],
         members
       )
       this.$store.commit('nim/changeTeamMembers', { teamId, data1 })
 
       const data2 = window.nim.cutTeamMembers(
-        this.nimData.teamMembers[teamId],
+        this.$store.state.nim.teamMembers[teamId],
         members.invalid
       )
       this.$store.commit('nim/changeTeamMembers', { teamId, data2 })
@@ -163,13 +150,21 @@ export default {
     // 会话
     onSessions(sessions) {
       console.log('收到会话列表', sessions)
-      const data = window.nim.mergeSessions(this.nimData.sessions, sessions)
+      const data = window.nim.mergeSessions(
+        this.$store.state.nim.sessions,
+        sessions
+      )
       this.$store.commit('nim/changeSessions', data)
+      this.$store.dispatch('nim/updateSessions')
     },
     onUpdateSession(session) {
       console.log('会话更新了', session)
-      const data = window.nim.mergeSessions(this.nimData.sessions, session)
+      const data = window.nim.mergeSessions(
+        this.$store.state.nim.sessions,
+        session
+      )
       this.$store.commit('nim/changeSessions', data)
+      this.$store.dispatch('nim/updateSessions')
     },
     // 消息
     onRoamingMsgs(obj) {
@@ -191,7 +186,11 @@ export default {
       }
       if (msgs.length === 0) return
       const sessionId = msgs[0].sessionId
-      const data = window.nim.mergeMsgs(this.nimData.msgs[sessionId], msgs)
+      const data = window.nim.mergeMsgs(
+        this.$store.state.nim.msgs[sessionId],
+        msgs
+      )
+      console.log('dataaaa', data)
 
       this.$store.commit('nim/changeMsgs', { sessionId, data })
     }
@@ -212,7 +211,7 @@ export default {
     // https://dev.yunxin.163.com/docs/product/IM%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/SDK%E5%BC%80%E5%8F%91%E9%9B%86%E6%88%90/Web%E5%BC%80%E5%8F%91%E9%9B%86%E6%88%90/%E5%88%9D%E5%A7%8B%E5%8C%96
     window.nim = window.NIM.getInstance({
       // 初始化
-      debug: true,
+      debug: false,
       appKey: '73ee59c4c9b6bc9d90bc5041239a6162',
       account: u_id,
       token: u_id,

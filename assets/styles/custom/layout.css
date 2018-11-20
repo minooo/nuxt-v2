@@ -93,13 +93,13 @@
   flex: 1;
 }
 .equal2 {
-  flex: 2
+  flex: 2;
 }
 .equal3 {
-  flex: 3
+  flex: 3;
 }
 .equal4 {
-  flex: 4
+  flex: 4;
 }
 
 /* 分配剩余空间，但不缩小 */
@@ -109,7 +109,7 @@
   flex-basis: 0%;
 }
 
-/* 自适应 */
+/* 分配剩余空间，且可以缩小 */
 .equal-auto {
   flex-grow: 1;
   flex-shrink: 1;
